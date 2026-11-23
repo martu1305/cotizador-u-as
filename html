@@ -1,0 +1,567 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Maia Nails</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Jost:wght@400;500;600&display=swap">
+<style>
+/* Concepto: formulario de salón en una columna, tres pasos (cotiza, agenda, confirma), todo en pastillas ovaladas alineadas. Blanco rosado con un solo rosa empolvado. */
+:root{
+  --bg:#fffbfc; --surface:#ffffff; --blush:#fbeef2; --blush-2:#f6dbe4; --rose:#dca2b5;
+  --rose-ink:#a45570; --on-accent:#ffffff; --fg:#3b2b31; --muted:#7e666e; --line:#f1e1e7;
+  --shadow:0 12px 28px -14px rgba(164,85,112,.55);
+  --display:"Bodoni Moda","Didot","Georgia",serif;
+  --body:"Jost","Avenir Next","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1f1519; --surface:#2a1d23; --blush:#38252d; --blush-2:#4a303b; --rose:#8f5b70;
+    --rose-ink:#f0b3c6; --on-accent:#2a1520; --fg:#f8ecef; --muted:#c3a9b2; --line:#3f2c35;
+    --shadow:0 12px 28px -14px rgba(0,0,0,.7); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1f1519; --surface:#2a1d23; --blush:#38252d; --blush-2:#4a303b; --rose:#8f5b70;
+  --rose-ink:#f0b3c6; --on-accent:#2a1520; --fg:#f8ecef; --muted:#c3a9b2; --line:#3f2c35;
+  --shadow:0 12px 28px -14px rgba(0,0,0,.7); color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.45;
+  padding-block:20px 160px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body.no-bar{padding-block-end:56px}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--rose-ink);outline-offset:2px}
+.shell{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+
+/* encabezado */
+.hero{position:relative;isolation:isolate;padding:22px 0 0}
+.hero::before{content:"";position:absolute;z-index:-1;top:-6px;right:0;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--blush-2),transparent 68%)}
+.hero::after{content:"";position:absolute;z-index:-1;top:20px;right:44px;width:92px;height:92px;border-radius:50%;border:1px solid var(--rose);opacity:.55}
+.tag{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--rose-ink);font-weight:500}
+h1{font-family:var(--display);font-weight:500;font-size:clamp(36px,10vw,56px);line-height:1.02;letter-spacing:-.01em;margin:10px 0 12px;text-wrap:balance}
+h1 em{font-style:italic;font-weight:400;color:var(--rose-ink)}
+.lede{color:var(--muted);margin:0;max-width:46ch}
+
+/* pasos */
+.steps{display:flex;gap:8px;list-style:none;margin:0;padding:0}
+.steps li{flex:1;min-width:0}
+.steps button{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--muted);font-weight:500;font-size:14px;padding:0 8px}
+.steps button span{width:24px;height:24px;border-radius:50%;background:var(--blush);color:var(--rose-ink);display:grid;place-items:center;font-size:12px;font-weight:600;flex:none}
+.steps button[aria-current="step"]{background:var(--blush);border-color:var(--rose);color:var(--fg)}
+.steps button:disabled{opacity:.55;cursor:default}
+
+/* bloques */
+.page{display:flex;flex-direction:column;gap:34px}
+.blk{display:flex;flex-direction:column;gap:12px;min-width:0}
+h2{font-family:var(--display);font-weight:500;font-size:26px;line-height:1.15;margin:0}
+.help{color:var(--muted);font-size:14px;margin:-6px 0 0}
+.grp{display:flex;flex-direction:column;gap:10px;min-width:0}
+h3{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--rose-ink);margin:8px 0 0;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+h3 small{font-size:12px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--muted)}
+.list{display:flex;flex-direction:column;gap:10px}
+
+/* pastillas */
+.pill{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;width:100%;min-height:60px;padding:8px 20px 8px 9px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);text-align:left}
+.pill .ico{width:44px;height:44px;border-radius:50%;background:var(--blush);display:grid;place-items:center;font-size:21px}
+.pill .nm{font-weight:500;min-width:0}
+.pill .sub{display:block;font-size:13px;color:var(--muted);font-weight:400}
+.pill .pr{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill[aria-pressed="true"]{background:var(--blush);border-color:var(--rose)}
+.pill[aria-pressed="true"] .ico{background:var(--surface)}
+.pill.sm{grid-template-columns:minmax(0,1fr) auto;min-height:50px;padding:8px 18px}
+.pill.flat{grid-template-columns:minmax(0,1fr) auto;padding-left:20px}
+.lengths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:560px){.lengths{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.note{background:var(--blush);border-radius:22px;padding:14px 18px;font-size:14px;color:var(--fg);margin:0}
+
+/* puntas */
+.tips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.tip{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 4px 10px;border-radius:26px;border:1.5px solid var(--line);background:var(--surface)}
+.tip svg{width:44px;height:66px;display:block}
+.tip .shape{fill:var(--blush);stroke:var(--rose);stroke-width:2;stroke-linejoin:round}
+.tip .shine{stroke:var(--surface);stroke-width:3;stroke-linecap:round;opacity:.8}
+.tip span{font-size:13px;font-weight:500}
+.tip[aria-pressed="true"]{background:var(--blush);border-color:var(--rose)}
+.tip[aria-pressed="true"] .shape{fill:var(--blush-2);stroke:var(--rose-ink)}
+
+/* filas con contador */
+.row{display:grid;grid-template-columns:minmax(0,1fr) 54px auto;align-items:center;gap:10px;min-height:58px;padding:8px 12px 8px 20px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface)}
+.row .nm{font-weight:500;min-width:0}
+.row .sub{display:block;font-size:13px;color:var(--muted);font-weight:400}
+.row .pr{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.row.on{background:var(--blush);border-color:var(--rose)}
+.stp{display:flex;align-items:center;gap:4px}
+.stp button{width:36px;height:36px;padding:0;border-radius:50%;border:1.5px solid var(--rose);background:var(--surface);color:var(--rose-ink);font-size:20px;line-height:1;display:grid;place-items:center}
+.stp button:disabled{opacity:.35;cursor:default}
+.stp output{min-width:26px;text-align:center;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* resumen */
+.card{background:var(--surface);border:1.5px solid var(--line);border-radius:28px;padding:18px 20px}
+.ln{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid var(--line)}
+.ln:last-child{border-bottom:0}
+.ln b{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+.ln.tt{font-family:var(--display);font-size:20px;padding-top:14px}
+.empty{margin:0;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:8px}
+.facts dt{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--rose-ink);font-weight:600}
+.facts dd{margin:2px 0 0;font-family:var(--display);font-size:20px;overflow-wrap:anywhere}
+
+/* calendario */
+.cal{background:var(--surface);border:1.5px solid var(--line);border-radius:30px;padding:16px 14px 14px}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cal-head b{font-family:var(--display);font-weight:500;font-size:22px}
+.cal-head button{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--line);background:var(--bg);font-size:20px;line-height:1;display:grid;place-items:center;padding:0}
+.cal-head button:disabled{opacity:.35;cursor:default}
+.grid7{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.dow{text-align:center;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-bottom:6px}
+.day{aspect-ratio:1;width:100%;border-radius:50%;border:0;background:transparent;display:grid;place-items:center;font-variant-numeric:tabular-nums;padding:0}
+.day.libre{background:var(--blush);font-weight:600}
+.day:disabled{color:var(--muted);opacity:.4;cursor:default}
+.day.lleno{text-decoration:line-through}
+.day.hoy{box-shadow:inset 0 0 0 1.5px var(--rose)}
+.day[aria-pressed="true"]{background:var(--rose-ink);color:var(--on-accent);box-shadow:none}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:12px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px;background:var(--blush);border:1.5px solid var(--rose)}
+.legend i.off{background:transparent;border-color:var(--line)}
+.slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.slot{min-height:58px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 10px}
+.slot b{font-weight:600;font-variant-numeric:tabular-nums}
+.slot span{font-size:12px;color:var(--muted)}
+.slot[aria-pressed="true"]{background:var(--blush);border-color:var(--rose-ink)}
+.slot:disabled{opacity:.5;background:var(--bg);cursor:default}
+input[type=text]{width:100%;min-height:54px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);padding:0 22px}
+input[type=text]::placeholder{color:var(--muted)}
+
+/* botones */
+.primary,.cta{min-height:54px;border-radius:999px;border:0;background:var(--rose-ink);color:var(--on-accent);font-weight:600;padding:0 26px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;text-align:center}
+.primary:disabled{opacity:.45;cursor:default}
+.cta{width:100%;min-height:62px;font-size:18px;box-shadow:var(--shadow)}
+.ghost{min-height:48px;border-radius:999px;border:1.5px solid var(--rose);background:transparent;color:var(--rose-ink);font-weight:500;padding:0 22px}
+.foot{display:flex;flex-wrap:wrap;gap:10px;padding-top:22px;border-top:1px solid var(--line)}
+.sent{margin:0;font-size:14px;color:var(--muted)}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--surface);border-top:1px solid var(--line);
+  padding-top:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar-in{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+.bar-row{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.tot span{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tot b{font-family:var(--display);font-size:28px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1.1}
+.hint{margin:0;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.pill,.row,.tip,.day,.slot{transition:background .15s,border-color .15s}}
+</style>
+
+<div class="shell">
+  <header class="hero">
+    <span class="tag">Studio de uñas</span>
+    <h1>Bienvenida a <em>Maia Nails</em> 🌸</h1>
+    <p class="lede">Arma tu set, mira cuánto cuesta y agenda tu cita. Al final se abre WhatsApp con tu mensaje listo.</p>
+  </header>
+
+  <ol class="steps" aria-label="Pasos">
+    <li><button type="button" data-go="cotiza"><span>1</span>Cotiza</button></li>
+    <li><button type="button" data-go="agenda"><span>2</span>Agenda</button></li>
+    <li><button type="button" data-go="confirma"><span>3</span>Confirma</button></li>
+  </ol>
+
+  <main>
+    <!-- PASO 1 -->
+    <section class="page" id="p-cotiza" aria-label="Cotiza tu servicio">
+      <div class="blk">
+        <h2>Técnica</h2>
+        <div class="list" id="tecnicas"></div>
+        <p class="note" id="nota-gel" hidden>En gel semipermanente y rubber gel se incluyen 2 tonos lisos a elegir. Cualquier diseño extra incrementa el precio.</p>
+      </div>
+
+      <div class="blk" id="blk-largo" hidden>
+        <h2>Largo</h2>
+        <p class="help">Para acrílico. A mayor largo, mayor precio.</p>
+        <div class="lengths" id="largos"></div>
+      </div>
+
+      <div class="blk">
+        <h2>Puntas de salón</h2>
+        <p class="help">Elige la forma de tus uñas.</p>
+        <div class="tips" id="puntas"></div>
+      </div>
+
+      <div class="blk">
+        <h2>Decoraciones (extras)</h2>
+        <p class="help">Costo por uña. Indica en cuántas uñas quieres cada una.</p>
+        <div id="grupos" class="list" style="gap:18px"></div>
+        <div class="grp">
+          <h3>Forma</h3>
+          <button type="button" class="pill flat" id="forma" aria-pressed="false"><span class="nm">Cambio de forma</span><span class="pr">$20</span></button>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h2>Retiro</h2>
+        <p class="help">Si traes material de otra técnica. Costo por uña.</p>
+        <div class="list" id="retiro"></div>
+      </div>
+
+      <div class="blk">
+        <h2>Reposiciones</h2>
+        <p class="help">Para reparar uñas de un set anterior. Costo por uña.</p>
+        <div class="list" id="repos"></div>
+      </div>
+
+      <div class="blk">
+        <h2>Tu selección</h2>
+        <div class="card" id="resumen"></div>
+      </div>
+
+      <div class="foot">
+        <button type="button" class="ghost" data-act="clear">Limpiar todo</button>
+      </div>
+    </section>
+
+    <!-- PASO 2 -->
+    <section class="page" id="p-agenda" aria-label="Agenda tu cita" hidden>
+      <div class="blk">
+        <h2>Elige tu fecha</h2>
+        <p class="help">Lunes a viernes: 9:00 am, 1:00 pm, 4:00 pm y 8:00 pm. Sábado: 9:00 am y 1:00 pm. Domingo cerrado.</p>
+        <div class="cal">
+          <div class="cal-head">
+            <button type="button" id="prev" aria-label="Mes anterior">‹</button>
+            <b id="mes"></b>
+            <button type="button" id="next-mes" aria-label="Mes siguiente">›</button>
+          </div>
+          <div class="grid7" id="dows"></div>
+          <div class="grid7" id="dias"></div>
+          <div class="legend"><span><i></i>Día con horarios</span><span><i class="off"></i>Sin horarios o cerrado</span></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <h2 id="slots-title">Horarios</h2>
+        <div class="slots" id="slots"></div>
+      </div>
+
+      <div class="blk" id="panel-salon" hidden>
+        <button type="button" class="ghost" id="modo-salon" aria-pressed="false">Modo salón: bloquear horarios</button>
+      </div>
+
+      <div class="blk">
+        <h2>Tus datos</h2>
+        <input type="text" id="nombre" placeholder="Nombre de la clienta" autocomplete="name" aria-label="Nombre de la clienta" maxlength="60">
+      </div>
+
+      <div class="foot">
+        <button type="button" class="ghost" data-act="back">Regresar</button>
+        <button type="button" class="ghost" data-act="clear">Limpiar todo</button>
+      </div>
+    </section>
+
+    <!-- PASO 3 -->
+    <section class="page" id="p-confirma" aria-label="Confirma tu cita" hidden>
+      <div class="blk">
+        <h2>Revisa tu cita</h2>
+        <div class="card">
+          <dl class="facts">
+            <div><dt>Nombre</dt><dd id="f-nombre"></dd></div>
+            <div><dt>Fecha</dt><dd id="f-fecha"></dd></div>
+            <div><dt>Hora</dt><dd id="f-hora"></dd></div>
+          </dl>
+          <div id="resumen-final"></div>
+        </div>
+      </div>
+
+      <div class="blk">
+        <a class="cta" id="cta" href="https://wa.me/" target="_blank" rel="noopener">Confirmar cita por WhatsApp</a>
+        <p class="sent" id="enviado" hidden>Se abrió WhatsApp con tu mensaje. Envíalo y tu cita queda confirmada cuando Maia te responda.</p>
+        <p class="sent">El precio es estimado y se confirma en el salón.</p>
+      </div>
+
+      <div class="foot">
+        <button type="button" class="ghost" data-act="back">Regresar</button>
+        <button type="button" class="ghost" data-act="clear">Limpiar todo</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="bar" id="bar">
+  <div class="bar-in">
+    <p class="hint" id="hint" hidden></p>
+    <div class="bar-row">
+      <div class="tot"><span>Total estimado</span><b id="total">$0</b></div>
+      <button type="button" class="primary" id="next">Continuar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ===== CONFIGURACIÓN DEL SALÓN ===== */
+var WHATSAPP = ""; // Número con código de país, sin + ni espacios. Ej: 5215512345678
+var OCUPADOS = []; // Citas ya confirmadas, formato "2026-11-20 09:00"
+var DIAS_CERRADOS = []; // Días sin atención, formato "2026-12-25"
+var MESES_ADELANTE = 3; // Cuántos meses hacia adelante se puede agendar
+var CAMBIO_FORMA = 20;
+var HORAS_LV = ["09:00","13:00","16:00","20:00"];
+var HORAS_SAB = ["09:00","13:00"];
+/* =================================== */
+
+var MESES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+var DIAS=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+var HORARIOS={0:[],1:HORAS_LV,2:HORAS_LV,3:HORAS_LV,4:HORAS_LV,5:HORAS_LV,6:HORAS_SAB};
+
+var TECNICAS=[
+  {id:"acr",nombre:"Acrílico",emoji:"💅",precio:"Desde $280",sub:"Largos 1 al 8"},
+  {id:"gel",nombre:"Gel semipermanente",emoji:"✨",precio:"$150",sub:"Manos",base:150},
+  {id:"rub",nombre:"Rubber Gel",emoji:"💧",precio:"$200",base:200}
+];
+var LARGOS=[];for(var i=0;i<8;i++){LARGOS.push({n:i+1,precio:280+20*i});}
+var PUNTAS=[
+  {id:"cuadrada",nombre:"Cuadrada",d:"M14 80V16Q14 12 18 12H42Q46 12 46 16V80Q46 88 38 88H22Q14 88 14 80Z"},
+  {id:"almendra",nombre:"Almendra",d:"M14 80V40Q14 18 30 8Q46 18 46 40V80Q46 88 38 88H22Q14 88 14 80Z"},
+  {id:"coffin",nombre:"Coffin",d:"M14 80V46L21 12Q22 9 25 9H35Q38 9 39 12L46 46V80Q46 88 38 88H22Q14 88 14 80Z"},
+  {id:"stiletto",nombre:"Stiletto",d:"M14 80V58L30 2L46 58V80Q46 88 38 88H22Q14 88 14 80Z"}
+];
+var GRUPOS=[
+  {t:"Efectos",items:[["espejo","Espejo",3],["aurora","Aurora",3],["azucar","Azúcar",3],["sueter","Suéter",3],["perla","Perla",3],["glitter","Glitter",3],["carey","Carey",3],["blooming","Blooming",3],["ojo","Ojo de gato",5],["relieve","Relieve",5],["3d","3D",10]]},
+  {t:"Arte y detalles",items:[["nailart","Nail art simple",3],["franc","Francesitas",3],["encap","Encapsulado",5],["natmuerta","Naturaleza muerta",5],["dijes","Dijes",10],["sticker","Sticker",5],["oro","Hoja de oro",5],["boomer","Baby boomer",5]]},
+  {t:"Cristales",nota:"Ch = chico · M = mediano · G = grande",items:[["crisch","Diseño de cristales Ch",10],["crism","Diseño de cristales M",15],["crisg","Diseño de cristales G",20],["fullch","Uña completa cristal Ch",30,"Largo 1, 2 y 3"],["fullm","Uña completa cristal M",45,"Largo 4, 5 y 6"],["fullg","Uña completa cristal G",55,"Largo 7, 8 y 9"]]}
+];
+var RETIRO=[["ret-acr","Acrílico",10,"Retiro de acrílico"],["ret-gel","Gel semipermanente",5,"Retiro de gel semipermanente"]];
+var REPOS=[["rep-acr","Acrílico",30,"Reposición de acrílico"],["rep-gel","Gel semipermanente",20,"Reposición de gel semipermanente"]];
+
+var ITEMS={}, ORDEN_DECO=[], ORDEN_OTROS=[];
+GRUPOS.forEach(function(g){g.items.forEach(function(x){ITEMS[x[0]]={linea:x[1],precio:x[2]};ORDEN_DECO.push(x[0]);});});
+RETIRO.concat(REPOS).forEach(function(x){ITEMS[x[0]]={linea:x[3],precio:x[2]};ORDEN_OTROS.push(x[0]);});
+
+var $=function(s,r){return (r||document).querySelector(s);};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+var money=function(n){return "$"+n.toLocaleString("es-MX");};
+var pad=function(n){return (n<10?"0":"")+n;};
+var iso=function(y,m,d){return y+"-"+pad(m+1)+"-"+pad(d);};
+var parseISO=function(s){var p=s.split("-").map(Number);return new Date(p[0],p[1]-1,p[2]);};
+var cap=function(s){return s.charAt(0).toUpperCase()+s.slice(1);};
+function horaTxt(h){var p=h.split(":").map(Number);return (p[0]%12||12)+":"+pad(p[1])+(p[0]>=12?" pm":" am");}
+function fechaLarga(s){var d=parseISO(s);return DIAS[d.getDay()]+" "+d.getDate()+" de "+MESES[d.getMonth()]+" de "+d.getFullYear();}
+
+/* ===== estado ===== */
+var KEY="maia-nails-v1";
+function nuevo(){return {tec:null,largo:null,punta:null,forma:false,cnt:{},fecha:null,hora:null,nombre:""};}
+var S=nuevo();
+try{var raw=localStorage.getItem(KEY);if(raw){var o=JSON.parse(raw);if(o&&typeof o==="object"){S=Object.assign(nuevo(),o);}}}catch(e){}
+function guardar(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+
+/* ===== disponibilidad ===== */
+function slotsDe(f){if(DIAS_CERRADOS.indexOf(f)>-1)return [];return HORARIOS[parseISO(f).getDay()]||[];}
+var tomados={};
+function esTomado(f,h){return OCUPADOS.indexOf(f+" "+h)>-1||!!tomados[f+" "+h];}
+function libre(f,h){
+  if(esTomado(f,h))return false;
+  var p=h.split(":").map(Number),d=parseISO(f);d.setHours(p[0],p[1],0,0);
+  return d>new Date();
+}
+function estadoDia(f){
+  var hs=slotsDe(f);if(!hs.length)return "cerrado";
+  var hoy=new Date();hoy.setHours(0,0,0,0);if(parseISO(f)<hoy)return "pasado";
+  return hs.some(function(h){return libre(f,h);})?"libre":"lleno";
+}
+if(S.fecha&&estadoDia(S.fecha)!=="libre"){S.fecha=null;S.hora=null;}
+if(S.fecha&&S.hora&&!libre(S.fecha,S.hora)){S.hora=null;}
+
+/* ===== precios ===== */
+function lineas(){
+  var L=[],i;
+  if(S.tec==="acr"){var l=LARGOS[(S.largo||1)-1];L.push({t:"Acrílico · Largo "+l.n,m:l.precio});}
+  else if(S.tec==="gel"){L.push({t:"Gel semipermanente",m:150});}
+  else if(S.tec==="rub"){L.push({t:"Rubber Gel",m:200});}
+  if(S.punta){PUNTAS.forEach(function(p){if(p.id===S.punta)L.push({t:"Puntas "+p.nombre.toLowerCase(),m:null});});}
+  ORDEN_DECO.forEach(function(id){var n=S.cnt[id]||0;if(n>0)L.push({t:ITEMS[id].linea+" ×"+n,m:n*ITEMS[id].precio});});
+  if(S.forma)L.push({t:"Cambio de forma",m:CAMBIO_FORMA});
+  ORDEN_OTROS.forEach(function(id){var n=S.cnt[id]||0;if(n>0)L.push({t:ITEMS[id].linea+" ×"+n,m:n*ITEMS[id].precio});});
+  return L;
+}
+function total(){return lineas().reduce(function(a,l){return a+(l.m||0);},0);}
+var ok1=function(){return total()>0;};
+var ok2=function(){return !!(S.fecha&&S.hora&&S.nombre.trim().length>=2&&libre(S.fecha,S.hora));};
+
+/* ===== construcción del DOM ===== */
+$("#tecnicas").innerHTML=TECNICAS.map(function(t){
+  return '<button type="button" class="pill" data-tec="'+t.id+'" aria-pressed="false"><span class="ico" aria-hidden="true">'+t.emoji+'</span><span class="nm">'+t.nombre+(t.sub?'<span class="sub">'+t.sub+'</span>':'')+'</span><span class="pr">'+t.precio+'</span></button>';
+}).join("");
+$("#largos").innerHTML=LARGOS.map(function(l){
+  return '<button type="button" class="pill sm" data-largo="'+l.n+'" aria-pressed="false"><span class="nm">Largo '+l.n+'</span><span class="pr">'+money(l.precio)+'</span></button>';
+}).join("");
+$("#puntas").innerHTML=PUNTAS.map(function(p){
+  return '<button type="button" class="tip" data-punta="'+p.id+'" aria-pressed="false"><svg viewBox="0 0 60 92" aria-hidden="true"><path class="shape" d="'+p.d+'"/><path class="shine" d="M23 34V66"/></svg><span>'+p.nombre+'</span></button>';
+}).join("");
+function fila(x){
+  return '<div class="row" data-row="'+x[0]+'"><div class="nm">'+x[1]+(x[3]&&x[0].indexOf("-")<0?'<span class="sub">'+x[3]+'</span>':'')+'</div><div class="pr">'+money(x[2])+'</div><div class="stp"><button type="button" data-stp="'+x[0]+'" data-d="-1" aria-label="Quitar uña: '+x[1]+'">−</button><output aria-live="polite">0</output><button type="button" data-stp="'+x[0]+'" data-d="1" aria-label="Agregar uña: '+x[1]+'">+</button></div></div>';
+}
+$("#grupos").innerHTML=GRUPOS.map(function(g){
+  return '<div class="grp"><h3>'+g.t+(g.nota?'<small>'+g.nota+'</small>':'')+'</h3>'+g.items.map(fila).join("")+'</div>';
+}).join("");
+$("#retiro").innerHTML=RETIRO.map(fila).join("");
+$("#repos").innerHTML=REPOS.map(fila).join("");
+$("#dows").innerHTML=["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"].map(function(d){return '<div class="dow">'+d+'</div>';}).join("");
+
+/* ===== render ===== */
+function renderResumen(el){
+  var L=lineas();
+  if(!L.length){el.innerHTML='<p class="empty">Aún no eliges ningún servicio.</p>';return;}
+  el.innerHTML=L.map(function(l){return '<div class="ln"><span>'+l.t+'</span><b>'+(l.m==null?"":money(l.m))+'</b></div>';}).join("")+'<div class="ln tt"><span>Total estimado</span><b>'+money(total())+'</b></div>';
+}
+function sync(){
+  $$("[data-tec]").forEach(function(b){b.setAttribute("aria-pressed",String(S.tec===b.dataset.tec));});
+  $("#blk-largo").hidden=S.tec!=="acr";
+  $("#nota-gel").hidden=!(S.tec==="gel"||S.tec==="rub");
+  $$("[data-largo]").forEach(function(b){b.setAttribute("aria-pressed",String(S.largo===Number(b.dataset.largo)));});
+  $$("[data-punta]").forEach(function(b){b.setAttribute("aria-pressed",String(S.punta===b.dataset.punta));});
+  $("#forma").setAttribute("aria-pressed",String(S.forma));
+  $$("[data-row]").forEach(function(r){
+    var id=r.dataset.row,n=S.cnt[id]||0;
+    $("output",r).textContent=n;r.classList.toggle("on",n>0);
+    $$("[data-stp]",r).forEach(function(b){b.disabled=(b.dataset.d==="-1"&&n<=0)||(b.dataset.d==="1"&&n>=10);});
+  });
+  $("#nombre").value!==S.nombre&&($("#nombre").value=S.nombre);
+  renderResumen($("#resumen"));
+  updateBar();
+}
+
+var hoy=new Date(),vY=hoy.getFullYear(),vM=hoy.getMonth(),minY=vY,minM=vM;
+var maxD=new Date(hoy.getFullYear(),hoy.getMonth()+MESES_ADELANTE,1),maxY=maxD.getFullYear(),maxM=maxD.getMonth();
+function renderCal(){
+  $("#mes").textContent=cap(MESES[vM])+" "+vY;
+  $("#prev").disabled=(vY===minY&&vM===minM);
+  $("#next-mes").disabled=(vY===maxY&&vM===maxM);
+  var off=(new Date(vY,vM,1).getDay()+6)%7,n=new Date(vY,vM+1,0).getDate(),h="",d;
+  for(d=0;d<off;d++)h+='<div></div>';
+  var hoyISO=iso(hoy.getFullYear(),hoy.getMonth(),hoy.getDate());
+  for(d=1;d<=n;d++){
+    var f=iso(vY,vM,d),e=estadoDia(f);
+    h+='<button type="button" class="day'+(e==="libre"?" libre":"")+(e==="lleno"?" lleno":"")+(f===hoyISO?" hoy":"")+'" data-fecha="'+f+'" aria-pressed="'+(S.fecha===f)+'" aria-label="'+fechaLarga(f)+(e==="libre"?"":", no disponible")+'"'+(e==="libre"?"":" disabled")+'>'+d+'</button>';
+  }
+  $("#dias").innerHTML=h;
+}
+function renderSlots(){
+  var box=$("#slots"),t=$("#slots-title");
+  if(!S.fecha){t.textContent="Horarios";box.innerHTML='<p class="empty" style="grid-column:1/-1">Elige un día para ver los horarios disponibles.</p>';return;}
+  t.textContent="Horarios · "+cap(DIAS[parseISO(S.fecha).getDay()])+" "+parseISO(S.fecha).getDate()+" de "+MESES[parseISO(S.fecha).getMonth()];
+  box.innerHTML=slotsDe(S.fecha).map(function(h){
+    var l=libre(S.fecha,h),t=esTomado(S.fecha,h);
+    if(modoSalon){return '<button type="button" class="slot" data-hora="'+h+'" aria-pressed="'+t+'"><b>'+horaTxt(h)+'</b><span>'+(t?"Ocupado · toca para liberar":"Libre · toca para bloquear")+'</span></button>';}
+    return '<button type="button" class="slot" data-hora="'+h+'" aria-pressed="'+(S.hora===h)+'"'+(l?"":" disabled")+'><b>'+horaTxt(h)+'</b><span>'+(l?"Disponible":"No disponible")+'</span></button>';
+  }).join("");
+}
+
+/* ===== base compartida (citas) ===== */
+var DB=null,UID=null,modoSalon=false,esSalon=false;
+function slotId(f,h){return f+"_"+h.replace(":","-");}
+function refrescar(){
+  if(S.fecha&&estadoDia(S.fecha)!=="libre"&&!modoSalon){S.fecha=null;S.hora=null;}
+  if(S.fecha&&S.hora&&!libre(S.fecha,S.hora)&&!modoSalon){S.hora=null;}
+  if(cur==="agenda"){renderCal();renderSlots();}
+  updateBar();
+}
+function reservar(f,h){
+  if(!DB)return Promise.resolve(false);
+  var ref=DB.doc("citas/"+slotId(f,h));
+  return ref.acquire({holder:UID||("v"+Math.random().toString(36).slice(2)),ttlMs:5000}).then(function(r){
+    if(!r.acquired)return false;
+    return ref.get().then(function(s){
+      if(s.exists)return false;
+      return ref.set({fecha:f,hora:h,estado:"reservada",creada:Date.now()}).then(function(){return true;});
+    });
+  }).catch(function(){return false;});
+}
+function alternarSalon(f,h){
+  if(!DB)return;
+  var ref=DB.doc("citas/"+slotId(f,h));
+  if(esTomado(f,h)){ref.delete().catch(function(){});}
+  else{ref.set({fecha:f,hora:h,estado:"bloqueada",creada:Date.now()}).catch(function(){});}
+}
+function iniciarDB(){
+  if(!window.claude||!window.claude.use)return;
+  Promise.all([window.claude.use("db"),window.claude.use("user")]).then(function(r){
+    DB=r[0];var U=r[1];if(!DB)return;
+    if(U){try{esSalon=!!U.canEdit();}catch(e){} U.id().then(function(i){UID=i;}).catch(function(){});}
+    var pm=$("#panel-salon");if(pm)pm.hidden=!esSalon;
+    DB.collection("citas").onSnapshot(function(snap){
+      var t={};snap.docs.forEach(function(d){var v=d.data();if(v&&v.fecha&&v.hora)t[v.fecha+" "+v.hora]=1;});
+      tomados=t;refrescar();
+    },function(){});
+  }).catch(function(){});
+}
+
+/* ===== navegación ===== */
+var STEPS=["cotiza","agenda","confirma"],cur="cotiza";
+function permitido(s){return s==="cotiza"||(s==="agenda"&&ok1())||(s==="confirma"&&ok1()&&ok2());}
+function waHref(){
+  var L=lineas();
+  var msg=["¡Hola, Quiero confirmar mi cita!🌸","","Nombre: "+S.nombre.trim(),"Servicio(s):"].concat(L.map(function(l){return "• "+l.t;})).concat(["","Fecha: "+fechaLarga(S.fecha),"Hora: "+horaTxt(S.hora),"Precio estimado: "+money(total())]).join("\n");
+  return "https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(msg);
+}
+function updateBar(){
+  var ok,hint="",label;
+  if(cur==="cotiza"){ok=ok1();label="Continuar a la agenda";if(!ok)hint="Elige una técnica o un servicio para continuar.";}
+  else{ok=ok2();label="Revisar mi cita";if(!ok){var f=[];if(!S.fecha)f.push("fecha");if(!S.hora)f.push("hora");if(S.nombre.trim().length<2)f.push("nombre");hint=f.length?"Falta: "+f.join(", ")+".":"Ese horario ya no está disponible. Elige otro.";}}
+  $("#total").textContent=money(total());
+  $("#next").disabled=!ok;$("#next").textContent=label;
+  $("#hint").hidden=!hint;$("#hint").textContent=hint;
+  $$(".steps [data-go]").forEach(function(b){var s=b.dataset.go;b.setAttribute("aria-current",s===cur?"step":"false");b.disabled=s!==cur&&!permitido(s);});
+}
+function go(s){
+  if(STEPS.indexOf(s)<0)s="cotiza";
+  while(!permitido(s))s=STEPS[STEPS.indexOf(s)-1];
+  cur=s;
+  STEPS.forEach(function(x){$("#p-"+x).hidden=x!==s;});
+  $("#bar").hidden=s==="confirma";
+  document.body.classList.toggle("no-bar",s==="confirma");
+  if(s==="agenda"){renderCal();renderSlots();}
+  if(s==="confirma"){
+    $("#f-nombre").textContent=S.nombre.trim();$("#f-fecha").textContent=cap(fechaLarga(S.fecha));$("#f-hora").textContent=horaTxt(S.hora);
+    renderResumen($("#resumen-final"));$("#cta").href=waHref();$("#enviado").hidden=true;
+  }
+  updateBar();
+  try{if(location.hash!=="#"+s)location.hash=s;}catch(e){}
+  window.scrollTo(0,0);
+}
+
+/* ===== eventos ===== */
+function cambio(){guardar();sync();}
+document.addEventListener("click",function(e){
+  var b=e.target.closest("button,a");if(!b)return;
+  if(b.dataset.tec){S.tec=S.tec===b.dataset.tec?null:b.dataset.tec;if(S.tec==="acr"&&!S.largo)S.largo=1;cambio();return;}
+  if(b.dataset.largo){S.largo=Number(b.dataset.largo);cambio();return;}
+  if(b.dataset.punta){S.punta=S.punta===b.dataset.punta?null:b.dataset.punta;cambio();return;}
+  if(b.id==="forma"){S.forma=!S.forma;cambio();return;}
+  if(b.dataset.stp){var id=b.dataset.stp,n=(S.cnt[id]||0)+Number(b.dataset.d);S.cnt[id]=Math.max(0,Math.min(10,n));cambio();return;}
+  if(b.dataset.fecha){S.fecha=b.dataset.fecha;if(S.hora&&!libre(S.fecha,S.hora))S.hora=null;guardar();renderCal();renderSlots();updateBar();return;}
+  if(b.dataset.hora){
+    if(modoSalon){alternarSalon(S.fecha,b.dataset.hora);return;}
+    S.hora=b.dataset.hora;guardar();renderSlots();updateBar();return;}
+  if(b.id==="modo-salon"){modoSalon=!modoSalon;b.setAttribute("aria-pressed",String(modoSalon));b.textContent=modoSalon?"Salir del modo salón":"Modo salón: bloquear horarios";if(!modoSalon)refrescar();else{renderCal();renderSlots();}return;}
+  if(b.id==="prev"){vM--;if(vM<0){vM=11;vY--;}renderCal();return;}
+  if(b.id==="next-mes"){vM++;if(vM>11){vM=0;vY++;}renderCal();return;}
+  if(b.dataset.go){go(b.dataset.go);return;}
+  if(b.id==="next"){go(STEPS[STEPS.indexOf(cur)+1]);return;}
+  if(b.dataset.act==="back"){go(STEPS[Math.max(0,STEPS.indexOf(cur)-1)]);return;}
+  if(b.dataset.act==="clear"){
+    if(b.dataset.arm){S=nuevo();guardar();vY=minY;vM=minM;$$("[data-act=clear]").forEach(function(x){x.textContent="Limpiar todo";delete x.dataset.arm;});sync();go("cotiza");}
+    else{b.dataset.arm="1";b.textContent="¿Borrar todo? Toca otra vez";setTimeout(function(){if(b.dataset.arm){delete b.dataset.arm;b.textContent="Limpiar todo";}},3500);}
+    return;
+  }
+  if(b.id==="cta"){
+    if(!(ok1()&&ok2())){e.preventDefault();go("agenda");return;}
+    b.href=waHref();$("#enviado").hidden=false;
+    reservar(S.fecha,S.hora);
+  }
+});
+$("#nombre").addEventListener("input",function(e){S.nombre=e.target.value;guardar();updateBar();});
+window.addEventListener("hashchange",function(){var h=location.hash.slice(1);if(h!==cur)go(h);});
+
+/* ===== inicio ===== */
+if(S.fecha){var pf=parseISO(S.fecha);vY=pf.getFullYear();vM=pf.getMonth();}
+sync();
+go(location.hash.slice(1)||"cotiza");
+iniciarDB();
+})();
+</script>
+
+</body></html>
