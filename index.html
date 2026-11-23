@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
 <title>Maia Nails</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Jost:wght@400;500;600&display=swap">
@@ -294,11 +294,12 @@ input[type=text]::placeholder{color:var(--muted)}
 "use strict";
 
 /* ===== CONFIGURACIÓN DEL SALÓN ===== */
-var WHATSAPP = ""; // Número con código de país, sin + ni espacios. Ej: 5215512345678
-var OCUPADOS = []; // Citas ya confirmadas, formato "2026-11-20 09:00"
-var DIAS_CERRADOS = []; // Días sin atención, formato "2026-12-25"
-var MESES_ADELANTE = 3; // Cuántos meses hacia adelante se puede agendar
+var WHATSAPP = "";              // Número con código de país, sin + ni espacios. Ej: 5215512345678
+var OCUPADOS = [];              // Citas ya confirmadas, formato "2026-11-20 09:00"
+var DIAS_CERRADOS = [];         // Días sin atención, formato "2026-12-25"
+var MESES_ADELANTE = 3;         // Cuántos meses hacia adelante se puede agendar
 var CAMBIO_FORMA = 20;
+var API_URL = "https://script.google.com/macros/s/AKfycbwXc0pt-rFDStjRYlAoHDeotMXDYbh07f-QCM2Hn4Zsxu_GHylpNf-Szk1ui69oskqtIQ/exec";               // Dirección del Apps Script (te la indica Claude / ver instrucciones)
 var HORAS_LV = ["09:00","13:00","16:00","20:00"];
 var HORAS_SAB = ["09:00","13:00"];
 /* =================================== */
@@ -350,8 +351,8 @@ function guardar(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 
 /* ===== disponibilidad ===== */
 function slotsDe(f){if(DIAS_CERRADOS.indexOf(f)>-1)return [];return HORARIOS[parseISO(f).getDay()]||[];}
-var tomados={};
-function esTomado(f,h){return OCUPADOS.indexOf(f+" "+h)>-1||!!tomados[f+" "+h];}
+var tomados={},tomadosApi={};
+function esTomado(f,h){var k=f+" "+h;return OCUPADOS.indexOf(k)>-1||!!tomados[k]||!!tomadosApi[k];}
 function libre(f,h){
   if(esTomado(f,h))return false;
   var p=h.split(":").map(Number),d=parseISO(f);d.setHours(p[0],p[1],0,0);
@@ -448,6 +449,19 @@ function renderSlots(){
     if(modoSalon){return '<button type="button" class="slot" data-hora="'+h+'" aria-pressed="'+t+'"><b>'+horaTxt(h)+'</b><span>'+(t?"Ocupado · toca para liberar":"Libre · toca para bloquear")+'</span></button>';}
     return '<button type="button" class="slot" data-hora="'+h+'" aria-pressed="'+(S.hora===h)+'"'+(l?"":" disabled")+'><b>'+horaTxt(h)+'</b><span>'+(l?"Disponible":"No disponible")+'</span></button>';
   }).join("");
+}
+
+/* ===== libreta compartida (Google Sheets) ===== */
+function cargarAPI(){
+  if(!API_URL)return;
+  fetch(API_URL).then(function(r){return r.json();}).then(function(j){
+    var t={};(j.ocupados||[]).forEach(function(k){t[k]=1;});tomadosApi=t;refrescar();
+  }).catch(function(){});
+}
+function enviarAPI(){
+  return fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},
+    body:JSON.stringify({fecha:S.fecha,hora:S.hora,nombre:S.nombre.trim(),servicios:lineas().map(function(l){return l.t;}).join(", "),total:total()})
+  }).then(function(r){return r.json();}).catch(function(){return null;});
 }
 
 /* ===== base compartida (citas) ===== */
@@ -549,6 +563,15 @@ document.addEventListener("click",function(e){
   }
   if(b.id==="cta"){
     if(!(ok1()&&ok2())){e.preventDefault();go("agenda");return;}
+    if(API_URL){
+      e.preventDefault();b.textContent="Reservando…";
+      enviarAPI().then(function(res){
+        b.textContent="Confirmar cita por WhatsApp";
+        if(res&&res.ok===false&&res.error==="ocupado"){tomadosApi[S.fecha+" "+S.hora]=1;refrescar();go("agenda");return;}
+        $("#enviado").hidden=false;window.location.href=waHref();
+      });
+      return;
+    }
     b.href=waHref();$("#enviado").hidden=false;
     reservar(S.fecha,S.hora);
   }
@@ -561,6 +584,8 @@ if(S.fecha){var pf=parseISO(S.fecha);vY=pf.getFullYear();vM=pf.getMonth();}
 sync();
 go(location.hash.slice(1)||"cotiza");
 iniciarDB();
+cargarAPI();
+if(API_URL)setInterval(cargarAPI,60000);
 })();
 </script>
 
